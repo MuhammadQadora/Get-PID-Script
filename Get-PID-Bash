@@ -1,0 +1,33 @@
+#!/bin/bash
+
+
+read -p "Enter pid : " pd
+
+res=$(ps -ef | awk '{print $2}' | grep ^$pd$)
+
+
+echo """
+#!/bin/bash
+res=\$(ps -ef | awk '{print \$2}' | grep ^$pd$)
+function pid() {
+
+	\$res
+
+	if [[ res -eq '' ]]
+	then
+		touch /home/muhammad/$pd.txt
+		echo "Text Was made"
+	else
+		return
+	fi
+
+}
+
+pid
+
+""" > TestScript
+
+echo "* * * * * bash TestScript" > CheckScript
+
+crontab CheckScript
+

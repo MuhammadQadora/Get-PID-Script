@@ -1,0 +1,36 @@
+#!/bin/python3
+
+import subprocess
+from subprocess import PIPE
+name = input("enter process name: ")
+print(name)
+
+new = subprocess.run(['echo',f"""
+#!/bin/python3
+
+import subprocess
+from subprocess import PIPE
+
+
+def pid_name():
+	
+	
+	res = subprocess.run("pidof {name} | cut -d' ' -f1 ", shell=True, stdout=PIPE)
+
+	if res != '':
+		print('noooooo')
+		return
+	else
+		subprocess.run("touch /home/muhammad/ErrorPidNotFound", shell=True)
+		print('Error process not found')
+
+pid_name()"""],stdout=PIPE)
+
+b = subprocess.run(["tee","ScriptRun"],input=new.stdout)
+
+
+cro = subprocess.run(["echo","* * * * * python3 ScriptRun"],stdout=PIPE)
+
+bb = subprocess.run(["tee","Check"],input=cro.stdout,stdout=PIPE)
+cron = subprocess.run(["crontab","Check"],stdout=PIPE)
+
